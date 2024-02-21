@@ -1,0 +1,32 @@
+[
+  {
+    "id": "001",
+    "image": "assets/images/amine.jpg",
+    "like": "1.234k"
+  },
+  {
+    "id": "002",
+    "image": "assets/images/logo.jpg",
+    "like": "5.164k"
+  },
+  {
+    "id": "003",
+    "image": "assets/images/amine.jpg",
+    "like": "2.034k"
+  },
+  {
+    "id": "004",
+    "image": "assets/images/amine.jpg",
+    "like": "3.441k"
+  },
+  {
+    "id": "005",
+    "image": "assets/images/amine.jpg",
+    "like": "523"
+  },
+  {
+    "id": "006",
+    "image": "assets/images/logo.jpg",
+    "like": "244"
+  }
+]
