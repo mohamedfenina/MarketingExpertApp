@@ -1,19 +1,24 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketing_experts/bloc/diplome_profile_cubit.dart';
+import 'package:marketing_experts/view/premuim_screen.dart';
 
 import '../app/configs/colors.dart';
 import '../app/configs/theme.dart';
 import '../bloc/diplome_profile_state.dart';
 import '../bloc/gallery_profile_cubit.dart';
+import '../components/userItem.dart';
 import 'chat_screen.dart';
 
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key, required this.personal}) : super(key: key);
   final bool personal;
+
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -22,6 +27,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool follow = false;
   int index = 0;
+  bool status = false;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -116,38 +122,121 @@ class _ProfilePageState extends State<ProfilePage> {
                 childAspectRatio: 0.62,
                 physics: const BouncingScrollPhysics(),
                 children: state.galleryProfiles
-                    .map((gallery) => Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    gallery.image,
+                    .map((gallery) => MaterialButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: (){
+                    if(gallery.premium == false || status == true){
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext dialogContext)
+                          {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 20,vertical: MediaQuery.of(context).size.height * 0.15),
+
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child:  Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(onPressed: (){
+                                          Navigator.pop(context);
+                                        }, icon: Icon(CupertinoIcons.xmark,color: Colors.black,size: 25,)),
+                                      ],
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        child: Image.asset(
+                                          gallery.image,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+
+                              ),
+                            );
+                          });
+                    }
+                    else{
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PremuimScreen(),)).then((value) {
+                        setState(() {
+                          status = value;
+                        });
+                      });
+                    }
+                  },
+                      child: Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(24),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      gallery.image,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(24),
+
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(sigmaX: gallery.premium && status == false ?5.0:00,
+                                        sigmaY: gallery.premium && status == false ?5.0:00),
+                                    child: Container(
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 6,
-                                horizontal: 10,
+                              Visibility(
+                                visible: !gallery.premium || status == true,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 6,
+                                    horizontal: 10,
+                                  ),
+                                  margin: const EdgeInsets.only(bottom: 12),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whiteColor,
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  child: Text(
+                                    gallery.like,
+                                    style: AppTheme.blackTextStyle.copyWith(
+                                        fontWeight: AppTheme.bold, fontSize: 10),
+                                  ),
+                                ),
                               ),
-                              margin: const EdgeInsets.only(bottom: 12),
-                              decoration: BoxDecoration(
-                                color: AppColors.whiteColor,
-                                borderRadius: BorderRadius.circular(24),
+
+
+                              Visibility(
+                                visible: gallery.premium && status == false,
+                                child: Positioned.fill(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Icon(
+                                      Icons.lock,
+                                      color: Colors.white,
+                                      size: 36,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              child: Text(
-                                gallery.like,
-                                style: AppTheme.blackTextStyle.copyWith(
-                                    fontWeight: AppTheme.bold, fontSize: 10),
-                              ),
-                            ),
-                          ],
-                        ))
+
+
+                            ],
+                          ),
+                    ))
                     .toList(),
               ),
             );

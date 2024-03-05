@@ -2,31 +2,37 @@
   {
     "id": "001",
     "image": "assets/images/amine.jpg",
-    "like": "1.234k"
+    "like": "1.234k",
+    "premium": false
   },
   {
     "id": "002",
     "image": "assets/images/logo.jpg",
-    "like": "5.164k"
+    "like": "5.164k",
+    "premium": true
   },
   {
     "id": "003",
     "image": "assets/images/amine.jpg",
-    "like": "2.034k"
+    "like": "2.034k",
+    "premium": true
   },
   {
     "id": "004",
     "image": "assets/images/amine.jpg",
-    "like": "3.441k"
+    "like": "3.441k",
+    "premium": true
   },
   {
     "id": "005",
     "image": "assets/images/amine.jpg",
-    "like": "523"
+    "like": "523",
+    "premium": true
   },
   {
     "id": "006",
     "image": "assets/images/logo.jpg",
-    "like": "244"
+    "like": "244",
+    "premium": true
   }
 ]
