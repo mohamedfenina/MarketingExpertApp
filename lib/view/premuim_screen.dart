@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marketing_experts/app/configs/colors.dart';
 import 'package:marketing_experts/app/configs/theme.dart';
 
 import '../components/userItem.dart';
+
 import '../widgets/premuim_components.dart';
 
 class PremuimScreen extends StatefulWidget {
@@ -33,22 +35,41 @@ class _PremuimScreenState extends State<PremuimScreen> {
                 bottomRight: Radius.circular(30),
               ),
             ),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text('Unshackle your imaginative sprite',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),),
-                  SizedBox(
-                    height: 10,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    margin: const EdgeInsets.only(top: 20),
+                    child: IconButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(CupertinoIcons.xmark,
+                      color: Colors.white,
+                      size: 25,),
+                    ),
                   )
-                ],
-              ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('Unshackle your imaginative sprite',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                      SizedBox(
+                        height: 10,
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
@@ -170,18 +191,18 @@ class _PremuimScreenState extends State<PremuimScreen> {
                 Row(
                   children: [
                    Secure(text: 'Terms of Use'),
-                    Padding(padding: EdgeInsets.symmetric(horizontal: 10),
+                    Padding(padding: EdgeInsets.symmetric(horizontal: 5),
                       child: Text('|',style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),),),
 
                     Secure(text: 'Privacy Policy'),
-                    Padding(padding: EdgeInsets.symmetric(horizontal: 10),
+                    Padding(padding: EdgeInsets.symmetric(horizontal: 5),
                       child: Text('|',style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),),),
                     Secure(text: 'Restore'),

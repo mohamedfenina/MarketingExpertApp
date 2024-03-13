@@ -485,7 +485,7 @@ class _ProfilePageState extends State<ProfilePage> {
               });
             },
             style: ElevatedButton.styleFrom(
-              primary:follow == false ?  AppColors.greenColor : Colors.white,
+              backgroundColor: follow == false ?  AppColors.greenColor : Colors.white,
               minimumSize: const Size(120, 45),
               elevation: 8,
               shadowColor: AppColors.primaryColor.withOpacity(0.3) ,

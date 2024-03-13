@@ -105,6 +105,6 @@ Widget Secure({
   required String text,
 })=>Text(text,style: TextStyle(
   color: Colors.grey,
-  fontSize: 18,
+  fontSize: 15,
   fontWeight: FontWeight.w600
 ),);
